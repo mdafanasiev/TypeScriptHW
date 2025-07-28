@@ -50,8 +50,8 @@ function toWords(number: number | string, asOrdinal?: boolean): string {
 
 function generateWords(number: number): string[] | string{
     let remainder: number;
-	let word: string; 
-    let words: string[] = arguments[1];
+	let word: string = ''; 
+    let words = arguments[1];
 
     // We’re done
     if (number === 0) {
