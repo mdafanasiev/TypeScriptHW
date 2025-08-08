@@ -4,7 +4,7 @@ class MapTest {
 
   add(key: string, value: PrimitiveType): this {
     const hash = this.hash(key);
-    if (this.hasElems(this.hashList[hash]))
+    if (typeof this.hashList[hash] == "undefined")
       this.hashList[hash] = new LinkedList();
     
 	this.hashList[hash].add({ key, value });
@@ -13,7 +13,7 @@ class MapTest {
 
   delete(key: string): boolean {
     const hash = this.hash(key);
-    if (this.hasElems(this.hashList[hash])) {
+    if (typeof this.hashList[hash] == "undefined") {
       return false;
     }
     return this.hashList[hash].delete(key);
@@ -21,7 +21,7 @@ class MapTest {
 
   get(key: string): PrimitiveType | undefined {
     const hash = this.hash(key);
-    if (this.hasElems(this.hashList[hash])) {
+    if (typeof this.hashList[hash] == "undefined") {
       return undefined;
     }
 
@@ -36,9 +36,7 @@ class MapTest {
     return key.length % this.maxHashesCount;
   }
 
-  private hasElems(hashElement: LinkedList | undefined): hashElement is undefined {
-	return typeof hashElement == "undefined";
-  } 
+
 }
 
 class LinkedList {
@@ -73,8 +71,8 @@ class LinkedList {
        return false;
     }
 
-	if (this.head.value.key = key) {
-		this.head = null;
+	if (this.head.value.key == key) {
+		this.head = this.head.next;
 		return true;
 	}
 

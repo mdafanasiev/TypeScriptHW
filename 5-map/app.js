@@ -5,21 +5,21 @@ var MapTest = /** @class */ (function () {
     }
     MapTest.prototype.add = function (key, value) {
         var hash = this.hash(key);
-        if (this.hasElems(this.hashList[hash]))
+        if (typeof this.hashList[hash] == "undefined")
             this.hashList[hash] = new LinkedList();
         this.hashList[hash].add({ key: key, value: value });
         return this;
     };
     MapTest.prototype.delete = function (key) {
         var hash = this.hash(key);
-        if (this.hasElems(this.hashList[hash])) {
+        if (typeof this.hashList[hash] == "undefined") {
             return false;
         }
         return this.hashList[hash].delete(key);
     };
     MapTest.prototype.get = function (key) {
         var hash = this.hash(key);
-        if (this.hasElems(this.hashList[hash])) {
+        if (typeof this.hashList[hash] == "undefined") {
             return undefined;
         }
         return this.hashList[hash].find(key);
@@ -29,9 +29,6 @@ var MapTest = /** @class */ (function () {
     };
     MapTest.prototype.hash = function (key) {
         return key.length % this.maxHashesCount;
-    };
-    MapTest.prototype.hasElems = function (hashElement) {
-        return typeof hashElement == "undefined";
     };
     return MapTest;
 }());
@@ -59,8 +56,8 @@ var LinkedList = /** @class */ (function () {
         if (!this.head) {
             return false;
         }
-        if (this.head.value.key = key) {
-            this.head = null;
+        if (this.head.value.key == key) {
+            this.head = this.head.next;
             return true;
         }
         var currNode = this.head.next;
