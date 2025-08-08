@@ -3,7 +3,7 @@ var MapTest = /** @class */ (function () {
         this.hashList = [];
         this.maxHashesCount = 100;
     }
-    MapTest.prototype.add = function (key, value) {
+    MapTest.prototype.set = function (key, value) {
         var hash = this.hash(key);
         if (typeof this.hashList[hash] == "undefined")
             this.hashList[hash] = new LinkedList();
@@ -85,8 +85,8 @@ var LinkedListNode = /** @class */ (function () {
     return LinkedListNode;
 }());
 var weatherMap = new MapTest();
-weatherMap.add('London', 20);
-weatherMap.add("Amsterdam", 15);
-weatherMap.add('Berlin', 25);
+weatherMap.set('London', 20);
+weatherMap.set("Amsterdam", 15);
+weatherMap.set('Berlin', 25);
 console.log(weatherMap.get('London')); // Выведет 20
 console.log(weatherMap.get("Amsterdam")); // Выведет 15

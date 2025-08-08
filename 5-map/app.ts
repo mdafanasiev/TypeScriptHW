@@ -2,7 +2,7 @@ class MapTest {
   private hashList: LinkedList[] = [];
   private maxHashesCount: number = 100;
 
-  add(key: string, value: PrimitiveType): this {
+  set(key: string, value: PrimitiveType): this {
     const hash = this.hash(key);
     if (typeof this.hashList[hash] == "undefined")
       this.hashList[hash] = new LinkedList();
@@ -115,8 +115,8 @@ class LinkedListNode {
 }
 
 let weatherMap = new MapTest();
-weatherMap.add('London', 20);
-weatherMap.add("Amsterdam", 15);
-weatherMap.add('Berlin', 25);
+weatherMap.set('London', 20);
+weatherMap.set("Amsterdam", 15);
+weatherMap.set('Berlin', 25);
 console.log(weatherMap.get('London')); // Выведет 20
 console.log(weatherMap.get("Amsterdam")); // Выведет 15
