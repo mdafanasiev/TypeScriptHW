@@ -1,49 +1,48 @@
-var MapTest = /** @class */ (function () {
-    function MapTest() {
-        this.hashList = [];
-        this.maxHashesCount = 100;
-    }
-    MapTest.prototype.set = function (key, value) {
-        var hash = this.hash(key);
+"use strict";
+class MapTest {
+    hashList = [];
+    maxHashesCount = 100;
+    set(key, value) {
+        const hash = this.hash(key);
         if (typeof this.hashList[hash] == "undefined")
             this.hashList[hash] = new LinkedList();
-        this.hashList[hash].add({ key: key, value: value });
+        this.hashList[hash].add({ key, value });
         return this;
-    };
-    MapTest.prototype.delete = function (key) {
-        var hash = this.hash(key);
+    }
+    delete(key) {
+        const hash = this.hash(key);
         if (typeof this.hashList[hash] == "undefined") {
             return false;
         }
         return this.hashList[hash].delete(key);
-    };
-    MapTest.prototype.get = function (key) {
-        var hash = this.hash(key);
+    }
+    get(key) {
+        const hash = this.hash(key);
         if (typeof this.hashList[hash] == "undefined") {
             return undefined;
         }
         return this.hashList[hash].find(key);
-    };
-    MapTest.prototype.clear = function () {
+    }
+    clear() {
         this.hashList = [];
-    };
-    MapTest.prototype.hash = function (key) {
+    }
+    hash(key) {
         return key.length % this.maxHashesCount;
-    };
-    return MapTest;
-}());
-var LinkedList = /** @class */ (function () {
-    function LinkedList() {
+    }
+}
+class LinkedList {
+    head;
+    constructor() {
         this.head = null;
     }
-    LinkedList.prototype.add = function (NodeValue) {
+    add(NodeValue) {
         this.head = new LinkedListNode(NodeValue, this.head);
-    };
-    LinkedList.prototype.find = function (key) {
+    }
+    find(key) {
         if (!this.head) {
             return undefined;
         }
-        var currNode = this.head;
+        let currNode = this.head;
         while (currNode) {
             if (currNode.value.key == key) {
                 return currNode.value.value;
@@ -51,8 +50,8 @@ var LinkedList = /** @class */ (function () {
             currNode = currNode.next;
         }
         return undefined;
-    };
-    LinkedList.prototype.delete = function (key) {
+    }
+    delete(key) {
         if (!this.head) {
             return false;
         }
@@ -60,8 +59,8 @@ var LinkedList = /** @class */ (function () {
             this.head = this.head.next;
             return true;
         }
-        var currNode = this.head.next;
-        var prevNode = this.head;
+        let currNode = this.head.next;
+        let prevNode = this.head;
         while (currNode) {
             if (currNode.value.key == key) {
                 prevNode.next = currNode.next;
@@ -71,20 +70,20 @@ var LinkedList = /** @class */ (function () {
             currNode = currNode.next;
         }
         return false;
-    };
-    LinkedList.prototype.clear = function () {
+    }
+    clear() {
         this.head = null;
-    };
-    return LinkedList;
-}());
-var LinkedListNode = /** @class */ (function () {
-    function LinkedListNode(NodeValue, next) {
+    }
+}
+class LinkedListNode {
+    next;
+    value;
+    constructor(NodeValue, next) {
         this.next = next;
         this.value = NodeValue;
     }
-    return LinkedListNode;
-}());
-var weatherMap = new MapTest();
+}
+let weatherMap = new MapTest();
 weatherMap.set('London', 20);
 weatherMap.set("Amsterdam", 15);
 weatherMap.set('Berlin', 25);
