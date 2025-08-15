@@ -4,12 +4,10 @@ const user = {
   skills: ["typescript", "javascript"],
 };
 
-type objProps<T> = T[keyof T];
-
-function pickObjectKeys<T extends Record<string, any>>(obj: T, props: objProps<T>[]): number {
+function pickObjectKeys<T extends Record<string, any>>(obj: T, props: (keyof T)[]): Record<keyof T, any>{
   const newProps = [];
 
-   for (const p of props) {
+  for (const p of props) {
 		newProps.push([p, obj[p]]); 
 	} 
 
