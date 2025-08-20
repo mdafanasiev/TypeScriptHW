@@ -53,27 +53,23 @@ var User = function () {
         _a;
 }();
 var person = new User();
-console.log(person.age); // 30
+//console.log(person.age); // 30
 person.age = 0;
-console.log(person.age); // 30
+//console.log(person.age); // 30
 person.age = 20;
-console.log(person.age); // 20
+//console.log(person.age); // 20
 function allowFunc(func) {
     return function (target, context) {
-        var value;
+        var value = 30;
         var getter = function () {
             return value;
         };
-        var setter = function (newValue) {
+        var setter = function (object, newValue) {
             if (func(newValue)) {
                 value = newValue;
             }
         };
         context.access.get = getter;
         context.access.set = setter;
-        //console.log(context);	
     };
 }
-var user1 = new User();
-user1.age = 20;
-user1.age = -5;
