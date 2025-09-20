@@ -1,12 +1,12 @@
 import axios, { Axios, AxiosHeaders } from 'axios';
 
-enum QueryTypes {
+export enum QueryTypes {
   GET = "GET",
   POST = "POST",
   DELETE = "DELETE",
 }
 
-class QueryGenerator {
+export class QueryGenerator {
 	private url: string;
 	private method: QueryTypes;
 	private headers: AxiosHeaders;
