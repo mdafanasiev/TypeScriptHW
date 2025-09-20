@@ -36,53 +36,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryGenerator = exports.QueryTypes = void 0;
-var axios_1 = require("axios");
-var QueryTypes;
-(function (QueryTypes) {
-    QueryTypes["GET"] = "GET";
-    QueryTypes["POST"] = "POST";
-    QueryTypes["DELETE"] = "DELETE";
-})(QueryTypes || (exports.QueryTypes = QueryTypes = {}));
-var QueryGenerator = /** @class */ (function () {
-    function QueryGenerator() {
+var app_1 = require("../12-builder/app");
+var Proxy = /** @class */ (function () {
+    function Proxy() {
+        this.qGen = new app_1.QueryGenerator();
     }
-    QueryGenerator.prototype.setMethod = function (qType) {
-        this.method = qType;
-        return this;
-    };
-    QueryGenerator.prototype.setURL = function (url) {
-        this.url = url;
-        return this;
-    };
-    QueryGenerator.prototype.setHeaders = function (headers) {
-        this.headers = headers;
-        return this;
-    };
-    QueryGenerator.prototype.setBody = function (body) {
-        this.body = body;
-        return this;
-    };
-    QueryGenerator.prototype.exec = function () {
+    Proxy.prototype.getResponse = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var res;
+            var data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, axios_1.default.request({
-                            url: this.url,
-                            method: this.method,
-                            headers: this.headers,
-                            data: this.body,
-                        })];
+                    case 0:
+                        if (!(id < 10)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.qGen
+                                .setURL("https://dummyjson.com/products/".concat(id))
+                                .setMethod(app_1.QueryTypes.GET)
+                                .exec()];
                     case 1:
-                        res = (_a.sent()).data;
-                        return [2 /*return*/, res];
+                        data = (_a.sent()).data;
+                        return [2 /*return*/, data];
+                    case 2: throw new Error('Ошибка!');
                 }
             });
         });
     };
-    return QueryGenerator;
+    return Proxy;
 }());
-exports.QueryGenerator = QueryGenerator;
-var qGenerator = new QueryGenerator();
-var res = qGenerator.setURL("https://api.escuelajs.co/api/v1/products").setMethod(QueryTypes.GET).exec();
+console.log(new Proxy().getResponse(5));
+console.log(new Proxy().getResponse(11));
