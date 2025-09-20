@@ -9,11 +9,11 @@ class Proxy {
 
 	async getResponse(id: number) {
 		if (id < 10) {
-			const {data} =  await this.qGen
+			const res =  await this.qGen
 				.setURL(`https://dummyjson.com/products/${id}`)
 				.setMethod(QueryTypes.GET)
 				.exec();
-			return data;
+			return res;
 		}
 		else {
 			throw new Error('Ошибка!');
